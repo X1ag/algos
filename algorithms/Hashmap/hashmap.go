@@ -12,13 +12,6 @@ type LinkedList struct {
 
 func (l *LinkedList) putAtHead(k, v int) {
 	l.Head = &Node{Key: k, Value: v, Next: l.Head}
-	// if l.Head != nil {
-	// 	prev := l.Head.Next
-	// 	l.Head = &Node{Key: k, Value: v, Next: prev}
-	// 	return
-	// }
-	// prev := l.Head
-	// l.Head = &Node{Key: k, Value: v, Next: prev}
 }
 
 type MyHashMap struct {
@@ -31,11 +24,8 @@ func (this *MyHashMap) getBucketIndex(key int) int {
 }
 
 func Constructor() MyHashMap {
-	capacity := 2;
+	capacity := 16;
 	buckets := make([]*LinkedList, capacity)	
-	for i := range buckets {
-		buckets[i] = &LinkedList{}
-	}
   return MyHashMap{buckets: buckets, capacity: capacity} 
 }
 
@@ -56,10 +46,33 @@ func (this *MyHashMap) Put(key int, value int)  {
 
 
 func (this *MyHashMap) Get(key int) int {
-   return -1 
+  indexBucket := this.getBucketIndex(key)
+	bucket := this.buckets[indexBucket] 
+
+	for node := bucket.Head; node != nil; {
+		if key == node.Key {
+			return node.Value
+		}
+		node = node.Next
+	}
+	return -1
 }
 
 
 func (this *MyHashMap) Remove(key int)  {
-    
+  indexBucket := this.getBucketIndex(key)
+	bucket := this.buckets[indexBucket] 
+
+	var prev *Node
+	for node := bucket.Head; node != nil; node = node.Next {
+		if key == node.Key {
+			if prev == nil {
+				bucket.Head = node.Next
+				return
+			}
+			prev.Next = node.Next	
+			return
+		}
+		prev = node
+	}
 }
