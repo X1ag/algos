@@ -15,8 +15,8 @@ func (l *LinkedList) putAtHead(k, v int) {
 }
 
 type MyHashMap struct {
-  buckets []*LinkedList
-	capacity int
+    buckets []*LinkedList
+    capacity int
 }
 
 func (this *MyHashMap) getBucketIndex(key int) int {
@@ -24,8 +24,11 @@ func (this *MyHashMap) getBucketIndex(key int) int {
 }
 
 func Constructor() MyHashMap {
-	capacity := 16;
-	buckets := make([]*LinkedList, capacity)	
+	capacity := 1009;
+	buckets := make([]*LinkedList, capacity)
+    for i := range buckets {
+        buckets[i] = &LinkedList{}
+    }	
   return MyHashMap{buckets: buckets, capacity: capacity} 
 }
 
