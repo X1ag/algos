@@ -1,0 +1,1 @@
+![Squares of a Sorted Array Leetcode Stats](readme_images/image.png)

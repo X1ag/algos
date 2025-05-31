@@ -1,4 +1,6 @@
-package main 
+package main
+
+import "strings"
 
 func isPalindrome(s string) bool {
     l, r := 0, len(s)-1
@@ -9,7 +11,9 @@ func isPalindrome(s string) bool {
         for l < r && !isAlphaNumeric(s[r]) {
             r--
         }
-        if toLower(s[l]) != toLower(s[r]) {
+        slLow := strings.ToLower(string(s[l]))
+        srLow := strings.ToLower(string(s[r]))
+        if slLow != srLow {
             return false
         }
         l++
@@ -22,11 +26,4 @@ func isAlphaNumeric(c byte) bool {
     return (c >= 'a' && c <= 'z') || 
            (c >= 'A' && c <= 'Z') || 
            (c >= '0' && c <= '9')
-}
-
-func toLower(c byte) byte {
-    if c >= 'A' && c <= 'Z' {
-        return c + ('a' - 'A')
-    }
-    return c
 }

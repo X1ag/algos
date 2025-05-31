@@ -1,0 +1,1 @@
+![Remove Duplicates from sorted array Leetcode Stats](readme_images/image.png)
